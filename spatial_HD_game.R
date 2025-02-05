@@ -3,7 +3,8 @@
 #make sure R is clear of old variables
 rm(list=ls())
 
-#set grids (of dimenson nd by nd) for the strategies, the resource distribution, payoffs and hawk neighbourhood
+#set grids (of dimenson nd by nd) for the strategies, the resource distribution,
+#payoffs and hawk neighbourhood
 
 nd=4
 
@@ -12,7 +13,8 @@ resource=array(0,dim=c(nd,nd))
 payoff=array(0,dim=c(nd,nd))
 htot=array(0,dim=c(nd,nd))
 
-#use set.seed to fix random number generator
+#use set.seed to fix random number generator - means you get the same random 
+#number every time you run it i think?
 set.seed(100)
 
 #set cost of contest
@@ -28,7 +30,8 @@ for(i in 1:nd){
     }
 }
 
-#initialize the grid randomly with hawks using a uniform random number generator threshold and a conditional statement
+#initialize the grid randomly with hawks using a uniform random number 
+#generator threshold and a conditional statement
 
 threshold=0.5
 
@@ -95,20 +98,24 @@ for(i in 1:nd){
     else{ #for a hawk
       
      if(grid[ap,j]==0 && grid[am,j]==0 && grid[i,bp]==0 && grid[i,bm]==0) payoff[i,j]=resource[i,j] #all neighbours are doves
-     if(grid[ap,j]==1 && grid[am,j]==1 && grid[i,bp]==1 && grid[i,bm]==1) payoff[i,j]=c-resource[i,j]/5 #all neighbours are hawks
-     if(grid[ap,j]==1 || grid[am,j]==1 || grid[i,bp]==1 || grid[i,bm]==1) payoff[i,j]=c-resource[i,j]/(htot[i,j]+1)} #some neighbours are hawks
+     if(grid[ap,j]==1 && grid[am,j]==1 && grid[i,bp]==1 && grid[i,bm]==1) payoff[i,j]=c+resource[i,j]/5 #all neighbours are hawks
+     if(grid[ap,j]==1 || grid[am,j]==1 || grid[i,bp]==1 || grid[i,bm]==1) payoff[i,j]=c+resource[i,j]/(htot[i,j]+1)} #some neighbours are hawks
      
      
   }
 }
 
+#we think this outputs what is a hawk and what is a dove - hawks are 1 and doves
+#are 0 
 grid
+
+#outputs the payoff of every cell in the grid
 payoff
 
 #measures of fitness
 
 
-#total fitness 
+#total fitness for everyone on there
 sum(payoff)
 
 #average fitness 
@@ -127,3 +134,8 @@ mean(payoff)/sqrt(vp)
 #  for(j in 1:nd){
 #    if(grid[i,j]==1) tmp=payoff[i,j]}}
 #sum(tmp)
+#
+#he said you need to change to tmp=tmp+payoff
+#he says he'll upload the corrected code to canvas
+
+

@@ -4,10 +4,13 @@
 rm(list=ls())
 
 #set the game in a function to pass parameters into the function
+#so i think this lets you run the spatial_HD_game code but in a function
+#just so you can change the variables more easily 
 
 hd_sp_game=function(nd,c,rmn, threshold){
   
-#set grids (of dimenson n by n) for the strategies, the resource distribution, payoffs and hawk neighbourhood
+#set grids (of dimenson n by n) for the strategies, the resource distribution, 
+#payoffs and hawk neighbourhood
 
 
 grid=array(0,dim=c(nd,nd))
@@ -19,10 +22,11 @@ htot=array(0,dim=c(nd,nd))
 set.seed(100)
 
 #set cost of contest
+##Except we don't because you get it from function
 
 
 #initialize the grid randomly with resource (with a mean of rmn)
-
+##once again you don't because you get it from the function 
 
 
 for(i in 1:nd){
@@ -31,8 +35,10 @@ for(i in 1:nd){
     }
 }
 
-#initialize the grid randomly with hawks using a uniform random number generator threshold and a conditional statement
+#initialize the grid randomly with hawks using a uniform random number 
+#generator threshold and a conditional statement
 
+##the threshold we already have from the function 
 
 for(i in 1:nd){
   for(j in 1:nd){
@@ -97,8 +103,8 @@ for(i in 1:nd){
     else{ #for a hawk
       
      if(grid[ap,j]==0 && grid[am,j]==0 && grid[i,bp]==0 && grid[i,bm]==0) payoff[i,j]=resource[i,j] #all neighbours are doves
-     if(grid[ap,j]==1 && grid[am,j]==1 && grid[i,bp]==1 && grid[i,bm]==1) payoff[i,j]=c-resource[i,j]/5 #all neighbours are hawks
-     if(grid[ap,j]==1 || grid[am,j]==1 || grid[i,bp]==1 || grid[i,bm]==1) payoff[i,j]=c-resource[i,j]/(htot[i,j]+1)} #some neighbours are hawks
+     if(grid[ap,j]==1 && grid[am,j]==1 && grid[i,bp]==1 && grid[i,bm]==1) payoff[i,j]=c+resource[i,j]/5 #all neighbours are hawks
+     if(grid[ap,j]==1 || grid[am,j]==1 || grid[i,bp]==1 || grid[i,bm]==1) payoff[i,j]=c+resource[i,j]/(htot[i,j]+1)} #some neighbours are hawks
      
      
   }

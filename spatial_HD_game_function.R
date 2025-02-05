@@ -1,5 +1,7 @@
 #Single shot spatially-explicit HD game
 
+##highly highly recommend sticking all of this code into chatgpt 
+
 #make sure R is clear of old variables
 rm(list=ls())
 
@@ -11,6 +13,7 @@ hd_sp_game=function(nd,c,rmn, threshold){
   
 #set grids (of dimenson n by n) for the strategies, the resource distribution, 
 #payoffs and hawk neighbourhood
+#so if nd is 4, the grid is 4x4
 
 
 grid=array(0,dim=c(nd,nd))
@@ -26,7 +29,8 @@ set.seed(100)
 
 
 #initialize the grid randomly with resource (with a mean of rmn)
-##once again you don't because you get it from the function 
+#using a poisson distribution to populate the array with random values,
+#the values have a mean of rmn so you can change it in the function
 
 
 for(i in 1:nd){
@@ -38,7 +42,10 @@ for(i in 1:nd){
 #initialize the grid randomly with hawks using a uniform random number 
 #generator threshold and a conditional statement
 
-##the threshold we already have from the function 
+#Each cell in the grid is assigned a Hawk (1.0) or Dove (0.0) 
+#depending on whether a random number exceeds the threshold 
+#(determined by runif(1, 0, 1)) - a higher threshold results in fewer
+#hawks as it increases the likelihood of a dove
 
 for(i in 1:nd){
   for(j in 1:nd){
@@ -127,6 +134,13 @@ sum(payoff)
 #mean(payoff)/sqrt(vp)
 }
 
+
+##basically what this bit is doing is running the function 10 times with 
+##different values for the threshold - this means it's changing the proportion
+##of hawks and doves in the population every time 
+
+##higher threshold means fewer hawks - this shows the relationship between
+##the threshold and the overall fitness payoff in the population 
 ff=array(0,dim=c(10))
 threshold=seq(0,1,length=10)
 
